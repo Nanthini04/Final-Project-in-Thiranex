@@ -1,83 +1,159 @@
 <!DOCTYPE html>
 <html lang="en">
-
+ 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+  <meta name="description" content="SmartShop - an online store for electronics, accessories and wearables.">
   <title>SmartShop</title>
-
   <link rel="stylesheet" href="Final project.css">
-
-  <script src="https://kit.fontawesome.com/6f6f8b4f76.js" crossorigin="anonymous"></script>
 </head>
-
+ 
 <body>
-
-<header>
-
-  <h1>🛍 SmartShop</h1>
-
-  <nav>
-
-    <a href="#">Home</a>
-
-    <a href="#">Products</a>
-
-    <a href="#">Cart</a>
-
-  </nav>
-
-  <div class="actions">
-
-    <input
-      type="text"
-      id="searchInput"
-      placeholder="Search products">
-
-    <button id="darkMode">
-
-      🌙
-
-    </button>
-
+ 
+  <!-- ============ HEADER / NAVIGATION ============ -->
+  <header class="site-header">
+    <div class="header-inner">
+ 
+      <a href="#home" class="logo" aria-label="SmartShop home">🛍 SmartShop</a>
+ 
+      <button class="menu-toggle" id="menuToggle" aria-label="Open menu" aria-expanded="false">☰</button>
+ 
+      <nav class="nav" id="mainNav" aria-label="Main navigation">
+        <a href="#home" data-route="home">Home</a>
+        <a href="#products" data-route="products">Products</a>
+        <a href="#wishlist" data-route="wishlist">Wishlist <span class="badge" id="wishCount">0</span></a>
+        <a href="#cart" data-route="cart">Cart <span class="badge" id="cartCount">0</span></a>
+        <a href="#contact" data-route="contact">Contact</a>
+      </nav>
+ 
+      <div class="actions">
+        <input type="search" id="searchInput" placeholder="Search products" aria-label="Search products">
+        <button id="darkMode" class="icon-btn" aria-label="Toggle dark mode" title="Toggle dark mode">🌙</button>
+      </div>
+ 
+    </div>
+  </header>
+ 
+  <main>
+ 
+    <!-- ============ HOME ============ -->
+    <section class="view" id="view-home">
+ 
+      <div class="hero">
+        <div class="hero-text">
+          <h1>Smart gadgets, simple shopping.</h1>
+          <p>Laptops, cameras, headphones and wearables at prices that make sense. Use code <strong>SMART10</strong> for 10% off your first order.</p>
+          <div class="hero-btns">
+            <a href="#products" class="btn btn-light">Shop now</a>
+            <a href="#contact" class="btn btn-outline">Contact us</a>
+          </div>
+        </div>
+      </div>
+ 
+      <h2 class="section-title">Shop by category</h2>
+      <div class="cat-tiles">
+        <a href="#products" class="tile" data-cat="Electronics"><span>💻</span>Electronics</a>
+        <a href="#products" class="tile" data-cat="Accessories"><span>🎧</span>Accessories</a>
+        <a href="#products" class="tile" data-cat="Wearables"><span>⌚</span>Wearables</a>
+      </div>
+ 
+      <h2 class="section-title">Top rated</h2>
+      <div class="grid" id="featuredContainer"></div>
+ 
+      <div class="perks">
+        <div><strong>Free delivery</strong><p>On orders above ₹5,000</p></div>
+        <div><strong>7-day returns</strong><p>Changed your mind? Send it back.</p></div>
+        <div><strong>Secure payment</strong><p>UPI, card or cash on delivery</p></div>
+      </div>
+ 
+    </section>
+ 
+    <!-- ============ PRODUCTS ============ -->
+    <section class="view" id="view-products">
+ 
+      <h2 class="section-title">All products</h2>
+ 
+      <div class="toolbar">
+        <div class="categories" id="categoryBar">
+          <button class="category active" data-cat="All">All</button>
+          <button class="category" data-cat="Electronics">Electronics</button>
+          <button class="category" data-cat="Accessories">Accessories</button>
+          <button class="category" data-cat="Wearables">Wearables</button>
+        </div>
+ 
+        <div class="filters">
+          <label>Sort by
+            <select id="sortSelect">
+              <option value="default">Featured</option>
+              <option value="low">Price: low to high</option>
+              <option value="high">Price: high to low</option>
+              <option value="rating">Rating</option>
+              <option value="name">Name (A-Z)</option>
+            </select>
+          </label>
+ 
+          <label>Max price: <strong id="priceLabel">₹60,000</strong>
+            <input type="range" id="priceRange" min="500" max="60000" step="500" value="60000">
+          </label>
+        </div>
+      </div>
+ 
+      <p class="result-count" id="resultCount" aria-live="polite"></p>
+      <div class="grid" id="productContainer"></div>
+ 
+    </section>
+ 
+    <!-- ============ WISHLIST ============ -->
+    <section class="view" id="view-wishlist">
+      <h2 class="section-title">Your wishlist</h2>
+      <div class="grid" id="wishlistContainer"></div>
+    </section>
+ 
+    <!-- ============ CART ============ -->
+    <section class="view" id="view-cart">
+      <h2 class="section-title">Your cart</h2>
+      <div class="cart-layout" id="cartContainer"></div>
+    </section>
+ 
+    <!-- ============ CONTACT ============ -->
+    <section class="view" id="view-contact">
+      <h2 class="section-title">Contact us</h2>
+      <form class="contact-form" id="contactForm" novalidate>
+        <label>Name
+          <input type="text" id="cName" placeholder="Your name" required>
+          <small class="error" id="cNameErr"></small>
+        </label>
+        <label>Email
+          <input type="email" id="cEmail" placeholder="you@example.com" required>
+          <small class="error" id="cEmailErr"></small>
+        </label>
+        <label>Message
+          <textarea id="cMsg" rows="5" placeholder="How can we help?" required></textarea>
+          <small class="error" id="cMsgErr"></small>
+        </label>
+        <button type="submit" class="btn btn-primary">Send message</button>
+      </form>
+    </section>
+ 
+  </main>
+ 
+  <footer class="site-footer">
+    <p>© <span id="year"></span> SmartShop. Built with HTML, CSS and JavaScript.</p>
+  </footer>
+ 
+  <!-- Floating cart button -->
+  <a href="#cart" class="cart-fab" aria-label="Go to cart">🛒 <span id="fabCount">0</span></a>
+ 
+  <!-- Modal (quick view + checkout) -->
+  <div class="modal hidden" id="modal" role="dialog" aria-modal="true">
+    <div class="modal-box" id="modalBody"></div>
   </div>
-
-</header>
-
-
-<section class="categories">
-
-  <button class="category active">All</button>
-
-  <button class="category">Electronics</button>
-
-  <button class="category">Accessories</button>
-
-  <button class="category">Wearables</button>
-
-</section>
-
-
-<section id="productContainer">
-
-</section>
-
-
-<div class="cart">
-
-  🛒 Cart:
-
-  <span id="cartCount">
-
-    0
-
-  </span>
-
-</div>
-
-<script src="Final project.js"></script>
-
+ 
+  <!-- Toast messages -->
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+ 
+  <script src="Final project.js"></script>
 </body>
-
+ 
 </html>
